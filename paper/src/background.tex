@@ -1,0 +1,11 @@
+\section{Background}
+	\label{sec:background}
+	
+2 Background
+
+A. Two-layer Synchronization
+
+Synchronization mechanism of a concurrent application on a specific platform is closely related to two-layer synchronization, i.e., hardware-based synchronization and software-based synchronization, hardware-based synchronization is put in charge of cache-coherence protocol which is implemented by hardware and can maintain the consistency of shared resource data that ends up stored in multiple local caches. The cache-coherence protocol implements load(read) and store operation which are fundamental for an architecture. Besides, more advanced operation, i.e.,  atomic, are also provided:compare-and-swap,fetch-and-increment,etc.,atomic operations can be used to implement locks and other synchronization mechanisms(e.g., lock-free and wait-free algorithms).  
+
+The Xeon Phi's cache-coherence protocol is implemented by a directory protocol based on MESI that uses GOLS(Globally Owned Locally Shared) to simulate a Owned state, thus permitting the share of a modified line. The primary aim is to avoid writebacks to memory when another core tries to read a modified line. Therefore,the Shared state does not mean that the line has not been modified. Each core's cache maintains the MESI state of the lines that it holds and the Distributed Tag Directories(DTDs) will hold the global GOLS coherency state of each line.Lines are assigned to each DTD regarding the line address instead of the core that is holding or requesting the line.
+
